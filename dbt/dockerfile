@@ -1,0 +1,43 @@
+FROM mcr.microsoft.com/azure-functions/python:4-python3.10
+
+# Set environment variables for snowflake connection
+
+ENV SNOWFLAKE_ACCOUNT=PS44068.central-india.azure \
+    SNOWFLAKE_USER=rohanadmin \
+    SNOWFLAKE_PASSWORD=Dataengineer@123 \
+    SNOWFLAKE_ROLE=dbt_role \
+    SNOWFLAKE_DATABASE=jaffle_shop_db \
+    SNOWFLAKE_WAREHOUSE=jaffle_shop_wh \
+    SNOWFLAKE_SCHEMA=default_schema \
+    AzureWebJobsScriptRoot=/home/site/wwwroot/dbt/az-func \
+    AzureFunctionsJobHost__Logging__Console__IsEnabled=true
+    # AzureWebJobsFeatureFlags=EnableWorkerIndexing \
+    # AzureWebJobsStorage=UseDevelopmentStorage \
+    # DefaultEndpointsProtocol=http \
+    # AccountName=devstoreaccount1 \
+    # AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw== \
+    # BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1 \
+    # QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1 \
+    # TableEndpoint=http://127.0.0.1:10002/devstoreaccount1
+
+
+COPY . /home/site/wwwroot/dbt
+
+WORKDIR /home/site/wwwroot/dbt
+
+# 1. Install dependencies from requirements.txt file
+# 2. Create empty dbt_packages folder in root folder
+RUN pip install --no-cache-dir -r requirements.txt && \
+    mkdir dbt_packages
+
+# WORKDIR /home/site/wwwroot/dbt
+RUN dbt deps
+
+# Set environment variables for dbt
+ENV DBT_PROJECT_DIR=/home/site/wwwroot/dbt \
+    DBT_PROFILES_DIR=/home/site/wwwroot/dbt
+
+# Set working dir to the root folder.
+WORKDIR /home/site/wwwroot/dbt
+
+EXPOSE 80

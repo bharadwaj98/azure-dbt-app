@@ -1,0 +1,14 @@
+dbt:
+  outputs:
+    default:
+      account: PS44068.central-india.azure
+      user: rohanadmin
+      password: Dataengineer@123
+      warehouse: jaffle_shop_wh
+      role: dbt_role
+      database: jaffle_shop_db
+      schema: default_schema
+      type: snowflake
+      threads: 1
+
+  target: default
