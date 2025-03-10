@@ -1,9 +1,9 @@
 dbt:
   outputs:
     default:
-      account: PS44068.central-india.azure
-      user: rohanadmin
-      password: Dataengineer@123
+      account: account
+      user: user
+      password: password
       warehouse: jaffle_shop_wh
       role: dbt_role
       database: jaffle_shop_db
