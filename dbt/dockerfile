@@ -2,9 +2,9 @@ FROM mcr.microsoft.com/azure-functions/python:4-python3.10
 
 # Set environment variables for snowflake connection
 
-ENV SNOWFLAKE_ACCOUNT=PS44068.central-india.azure \
-    SNOWFLAKE_USER=rohanadmin \
-    SNOWFLAKE_PASSWORD=Dataengineer@123 \
+ENV SNOWFLAKE_ACCOUNT=SNOWFLAKE_ACCOUNT \
+    SNOWFLAKE_USER=SNOWFLAKE_USER \
+    SNOWFLAKE_PASSWORD=SNOWFLAKE_PASSWORD \
     SNOWFLAKE_ROLE=dbt_role \
     SNOWFLAKE_DATABASE=jaffle_shop_db \
     SNOWFLAKE_WAREHOUSE=jaffle_shop_wh \
