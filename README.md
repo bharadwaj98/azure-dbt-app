@@ -1,1 +1,1 @@
-# docker-dbt-project
+# azure-dbt-app
